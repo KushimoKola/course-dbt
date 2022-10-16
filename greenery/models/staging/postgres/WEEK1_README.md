@@ -4,8 +4,8 @@ select count (distinct user_guid) from dev_db.dbt_kushimokolawole.stg_postgres__
 ```
 
 ## On average, how many orders do we receive per hour?
-with hourly_orders as (
 ```
+with hourly_orders as (
 select
     date_trunc('hour', created_at_utc),
     count(distinct order_guid) as orders
@@ -30,20 +30,33 @@ select avg(time_to_deliver) average_time_to_deliver from order_created_delivered
 ## How many users have only made one purchase? Two purchases? Three+ purchases?
 
 ```
-with order_per_user as (
-select 
-    count (a.order_guid) orders, b.user_guid 
-from 
-    dev_db.dbt_kushimokolawole.stg_postgres__order_items as a
-inner join 
-    dev_db.dbt_kushimokolawole.stg_postgres__orders as b
-on a.order_guid = b.order_guid
-group by user_guid
-)
-select orders as count_of_orders, count (user_guid) as unique_user
-from order_per_user
-group by 1
-order by 1;
+    with order_freq_by_user as (
+        -- count orders by user
+        select
+            user_guid
+            , count(order_guid) as order_freq
+        from dev_db.dbt_kushimokolawole.stg_postgres__orders
+        group by 1
+    ),
+    user_order_segmentation as (
+        -- classify users based on order frequency
+        select
+            user_guid
+            , case
+                when order_freq  = 1 then '1'
+                when order_freq  = 2 then '2'
+                when order_freq >= 3 then '3+'
+                else null
+            end as order_frequency
+        from order_freq_by_user
+    )
+    -- count freq types
+    select 
+        order_frequency
+        , count(user_guid) as freq_type_count
+    from user_order_segmentation
+    group by 1
+    order by 1;
 ```
 
 ## On average, how many unique sessions do we have per hour?
@@ -51,7 +64,7 @@ order by 1;
 with hourly_session as (
 select
     date_trunc('hour', created_at_utc),
-    count (session_guid) as sessioncd 
+    count (distinct session_guid) as session
 from 
     dev_db.dbt_kushimokolawole.stg_postgres__events
 group by 1
