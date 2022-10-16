@@ -3,13 +3,13 @@ with users_source as (
 ),
 recasted_user as (
     select
-        USER_ID as user_guid,
-        FIRST_NAME as first_name,
-        LAST_NAME as last_name,
-        PHONE_NUMBER as phone_number,
-        CREATED_AT as created_at_utc,
-        UPDATED_AT as updated_at_utc,
-        ADDRESS_ID as address_guid
+        user_id as user_guid,
+        first_name,
+        last_name,
+        phone_number,
+        created_at as created_at_utc,
+        uodated_at as updated_at_utc,
+        address_id as address_guid
     from
         users_source
 )

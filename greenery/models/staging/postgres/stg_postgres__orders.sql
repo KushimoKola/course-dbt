@@ -3,19 +3,19 @@ with orders_source as (
 ),
 recasted_order as (
     select
-        ORDER_ID as order_guid,
-        USER_ID as user_guid,
-        PROMO_ID as promo_desc,
-        ADDRESS_ID as address_guid,
-        CREATED_AT as created_at_utc,
-        ORDER_COST as order_cost,
-        SHIPPING_COST as shipping_cost,
-        ORDER_TOTAL as order_total_cost,
-        TRACKING_ID as tracking_guid,
-        SHIPPING_SERVICE as shipping_service,
-        ESTIMATED_DELIVERY_AT as estimated_delivery_at_utc,
-        DELIVERED_AT as delivered_at_utc,
-        STATUS as order_status
+        order_id as order_guid,
+        user_id as user_guid,
+        promo_id as promo_desc,
+        address_id as address_guid,
+        created_at as created_at_utc,
+        order_cost,
+        shipping_cost,
+        order_total as order_total_cost,
+        tracking_id as tracking_guid,
+        shipping_service,
+        estimated_delivery_at as estimated_delivery_at_utc,
+        delivery_at as delivered_at_utc,
+        status as order_status
     from
         orders_source
 )

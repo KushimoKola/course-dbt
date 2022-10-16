@@ -3,9 +3,9 @@ with order_item_source as (
 ),
 recasted_order_item as (
     select
-        ORDER_ID as order_guid,
-        PRODUCT_ID as product_guid,
-        QUANTITY as quantity
+        order_id as order_guid,
+        product_id as product_guid,
+        quantity as quantity
     from
         order_item_source
 )
