@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: int_sessions_events
+    description: ""
+    columns:
+      - name: user_guid
+        description: ""
+      - name: session_guid
+        description: ""
+      - name: total_sessions
+        description: ""
+      - name: session_duration
+        description: ""
+      - name: add_to_cart
+        description: ""
+      - name: checkout
+        description: ""
+      - name: package_shipped
+        description: ""
+      - name: page_view
+        description: ""
+      - name: session_started_at_utc
+        description: ""
+      - name: session_ended_at_utc
+        description: ""

@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct_user_sessions
+    description: ""
+    columns:
+      - name: user_guid
+        description: ""
+      - name: first_name
+        description: ""
+      - name: last_name
+        description: ""
+      - name: phone_number
+        description: ""
+      - name: email
+        description: ""
+      - name: address
+        description: ""
+      - name: zipcode
+        description: ""
+      - name: state
+        description: ""
+      - name: country
+        description: ""
+      - name: first_session_started_at_utc
+        description: ""
+      - name: last_session_started_at_utc
+        description: ""
+      - name: total_sessions
+        description: ""
+      - name: session_duration
+        description: ""
+      - name: add_to_cart
+        description: ""
+      - name: checkout
+        description: ""
+      - name: package_shipped
+        description: ""
+      - name: page_view
+        description: ""
