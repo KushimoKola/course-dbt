@@ -3,7 +3,8 @@ with users as (
 ),
 address as (
     select * from {{ ref('stg_postgres__addresses') }}
-)
+),
+final as (
 select
     us.user_guid,
     ad.address_guid,
@@ -20,16 +21,5 @@ select
 from
     users as us
     left join address as ad on us.address_guid = ad.address_guid
-group by
-    us.user_guid,
-    ad.address_guid,
-    us.first_name,
-    us.last_name,
-    us.phone_number,
-    us.email,
-    ad.address,
-    ad.zipcode,
-    ad.state,
-    ad.country,
-    us.created_at_utc,
-    us.updated_at_utc
+)
+select * from final
