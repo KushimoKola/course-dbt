@@ -5,7 +5,7 @@ order_items as (
     select * from {{ ref('stg_postgres__order_items') }}
 ),
 promos as (
-    select * from {{ ref('stg_postgres__promos') }}
+    select * from {{ ref('dim_promo') }}
 ),
 final as (
     select
@@ -13,7 +13,8 @@ final as (
         ord.user_guid,
         ordi.product_guid,
         ord.tracking_guid,
-        ord.promo_desc,
+        pro.promo_guid,
+        pro.promo_desc,
         ord.created_at_utc as order_created_at_utc,
         ordi.quantity as order_quantity,
         ord.order_cost,

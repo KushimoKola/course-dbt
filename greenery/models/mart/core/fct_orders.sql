@@ -7,8 +7,8 @@ final as (
         user_guid,
         product_guid,
         tracking_guid,
-        promo_desc,
-        case when promo_desc is null then false else true end is_promo,
+        promo_guid,
+        case when promo_guid is null then false else true end is_promo,
         order_created_at_utc,
         order_quantity,
         order_cost,
@@ -20,9 +20,9 @@ final as (
         shipping_service,
         order_estimated_delivery_at_utc,
         order_delivered_at_utc,
-        timediff(hour, created_at_utc, estimated_delivery_at_utc) as estimated_hours_to_delivery,
-        timediff(hour, created_at_utc, delivered_at_utc) as actual_hours_to_delivery,
-        timediff(hour, estimated_delivery_at_utc, delivered_at_utc) as hour_to_delivery_delay
+        timediff(hour, order_created_at_utc, order_estimated_delivery_at_utc) as estimated_hours_to_delivery,
+        timediff(hour, order_created_at_utc, order_delivered_at_utc) as actual_hours_to_delivery,
+        timediff(hour, order_estimated_delivery_at_utc, order_delivered_at_utc) as hour_to_delivery_delay
     from
         orders
 )
