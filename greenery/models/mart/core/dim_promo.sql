@@ -12,7 +12,8 @@ add_idempotent_key as (
 ),
 final as (
     select
-        {{ idempotent_key(['source_system', 'promo_desc']) }} as promo_guid,
+        --{{ idempotent_key(['source_system', 'promo_desc']) }} as promo_guid,
+        {{ dbt_utils.surrogate_key(['source_system', 'promo_desc']) }} as promo_guid,
         promo_desc,
         promo_discount,
         promo_status
