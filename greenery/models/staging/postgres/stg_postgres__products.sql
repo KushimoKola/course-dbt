@@ -5,7 +5,8 @@ recasted_product as (
     select
         product_id as product_guid,
         name as product_name,
-        price as product_price
+        price as product_price,
+        inventory as product_inventory
     from
         products_source
 )

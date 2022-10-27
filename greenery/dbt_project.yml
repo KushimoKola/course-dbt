@@ -33,6 +33,10 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   greenery:
-    # Config indicated by + and applies to all files under models/example/
-    example:
+    # Materialise everything model in staging as view
+    staging:
       +materialized: view
+    mart:
+        +post-hook: "GRANT SELECT ON {{ this }} to ROLE REPORTING;"
+        +materialized: table
+
